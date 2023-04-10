@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkh.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.pkh.dao.po.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="deal_password" jdbcType="VARCHAR" property="dealPassword" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mobie" jdbcType="VARCHAR" property="mobie" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="we_chat" jdbcType="VARCHAR" property="weChat" />
+    <result column="telegram" jdbcType="VARCHAR" property="telegram" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, user_id, user_name, `password`, deal_password, sex, `type`, phone, mobie, email, 
+    we_chat, telegram, address, zip_code, create_time, update_time
+  </sql>
+
+  <sql id="join_list_where">
+    <if test="userId != null and userId != '' ">
+      AND user_id = #{userId}
+    </if>
+    <if test="sex != null and sex != '' ">
+      AND sex = #{sex}
+    </if>
+    <if test="createTime != null and createTime.size() > 0">
+      AND create_time <![CDATA[>= ]]> #{createTime[0]} AND create_time <![CDATA[<= ]]> #{createTime[1]}
+    </if>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pkh.dao.po.User" useGeneratedKeys="true">
+    insert into t_user (user_id, user_name, `password`, 
+      deal_password, sex, `type`, 
+      phone, mobie, email, 
+      we_chat, telegram, address, 
+      zip_code, create_time, update_time
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{dealPassword,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{type,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mobie,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{weChat,jdbcType=VARCHAR}, #{telegram,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pkh.dao.po.User" useGeneratedKeys="true">
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() as id
+    </selectKey>
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="dealPassword != null">
+        deal_password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mobie != null">
+        mobie,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="weChat != null">
+        we_chat,
+      </if>
+      <if test="telegram != null">
+        telegram,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="dealPassword != null">
+        #{dealPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobie != null">
+        #{mobie,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null">
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="telegram != null">
+        #{telegram,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkh.dao.po.User">
+    update t_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="dealPassword != null">
+        deal_password = #{dealPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobie != null">
+        mobie = #{mobie,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null">
+        we_chat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="telegram != null">
+        telegram = #{telegram,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pkh.dao.po.User">
+    update t_user
+    set user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      deal_password = #{dealPassword,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mobie = #{mobie,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      we_chat = #{weChat,jdbcType=VARCHAR},
+      telegram = #{telegram,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParam" resultMap="BaseResultMap" parameterType="com.pkh.bean.param.UserListParam" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+      <include refid="join_list_where" />
+    </where>
+    <if test="sortBy != null and sortBy != ''">
+      ORDER BY ${sortBy}
+      <if test="sortOrder != null and sortOrder != ''">
+        ${sortOrder}
+      </if>
+    </if>
+    <if test="offset != null and pageSize != null">
+      LIMIT #{offset}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="countByParam" resultType="Integer" parameterType="com.pkh.bean.param.UserListParam" >
+    select count(*) from t_user
+    <where>
+      <include refid="join_list_where" />
+    </where>
+    <if test="offset != null and pageSize != null">
+      LIMIT #{offset}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="Map">
+    select
+    <include refid="Base_Column_List"/>
+    from t_user
+    where 1=1
+    <if test="map != null">
+      <foreach collection="map" item="value" index="key">
+        <if test="value != null and value != ''">
+          AND ${key} = #{value}
+        </if>
+      </foreach>
+    </if>
+    <if test="offset != null and pageSize != null">
+      LIMIT #{offset}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="countByCondition" resultType="Integer" parameterType="Map">
+    select count(*) from t_user
+    where 1=1
+    <if test="map != null">
+      <foreach collection="map" item="value" index="key">
+        <if test="value != null and value != ''">
+          AND ${key} = #{value}
+        </if>
+      </foreach>
+    </if>
+  </select>
+
+
+</mapper>

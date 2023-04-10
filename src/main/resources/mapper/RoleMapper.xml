@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkh.dao.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.pkh.dao.po.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_no" jdbcType="VARCHAR" property="roleNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_no, `name`, `status`, `type`, create_time, update_time
+  </sql>
+  <sql id="join_list_where">
+    <if test="roleNo != null and roleNo != '' ">
+      AND role_no = #{roleNo}
+    </if>
+    <if test="name != null and name != '' ">
+      AND `name` = #{name}
+    </if>
+    <if test="status != null and status != '' ">
+      AND `status` = #{status}
+    </if>
+    <if test="type != null and type != '' ">
+      AND `type` = #{type}
+    </if>
+    <if test="createTime != null and createTime.size() > 0 ">
+      AND create_time <![CDATA[>=]]]> #{createTime[0]} AND create_time <![CDATA[<=]]> #{createTime[1]}
+    </if>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pkh.dao.po.Role" useGeneratedKeys="true">
+    insert into t_role (role_no, `name`, `status`, 
+      `type`, create_time, update_time
+      )
+    values (#{roleNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{type,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pkh.dao.po.Role" useGeneratedKeys="true">
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleNo != null">
+        role_no,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleNo != null">
+        #{roleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkh.dao.po.Role">
+    update t_role
+    <set>
+      <if test="roleNo != null">
+        role_no = #{roleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.pkh.dao.po.Role">
+    update t_role
+    set role_no = #{roleNo,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      `type` = #{type,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParam" resultType="com.pkh.dao.po.Role" parameterType="com.pkh.bean.param.RoleListParam">
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+    <where>
+      <include refid="join_list_where" />
+    </where>
+    <if test="sortBy != null and sortBy != '' ">
+      ORDER BY #{sortBy}
+      <if test="sortOrder != null and sortOrder != '' ">
+        #{sortOrder}
+      </if>
+    </if>
+    <if test="offset != null and pageSize != null">
+      LIMIT #{offset}, #{pageSize}
+    </if>
+  </select>
+  <select id="countByParam" resultType="java.lang.Integer" parameterType="com.pkh.bean.param.RoleListParam">
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+    <where>
+      <include refid="join_list_where" />
+    </where>
+  </select>
+  <select id="selectByCondition" resultType="com.pkh.dao.po.Role" parameterType="Map">
+    select
+    <include refid="Base_Column_List"/>
+    from t_role
+    where 1=1
+    <if test="map != null">
+      <foreach collection="map" item="value" index="key">
+        <if test="value != null and value != '' ">
+          AND ${key} = #{value}
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="countByCondition" resultType="java.lang.Integer" parameterType="Map">
+
+  </select>
+
+</mapper>

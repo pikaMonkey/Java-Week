@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 方法一： 从外部指定properties配置文件, 除了使用resource属性指定外，还可通过url属性指定url
+            <properties resource="dbConfig.properties"></properties>
+        -->
+
+    <settings>
+        <!-- 全局的映射器启用或禁用缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载 -->
+        <setting name="aggressiveLazyLoa    ding" value="false"/>
+        <!-- 允许或不允许多种结果集从一个单独的语句中返回（需要适合的驱动） -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!-- 使用列标签代替列名。不同的驱动在这方便表现不同。参考驱动文档或充分测试两种方法来决定所使用的驱动 -->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 允许JDBC支持生成的键。需要适合的驱动。如果设置为true则这个设置强制生成的键被使用，尽管一些驱动拒绝兼容但仍然有效（比如Derby） -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!-- 指定MyBatis如何自动映射列到字段/属性。PARTIAL只会自动映射简单，没有嵌套的结果。FULL会自动映射任意复杂的结果（嵌套的或其他情况） -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- 这是默认的执行类型
+            SIMPLE :简单
+            REUSE:执行器可能重复使用prepared statements 语句
+            BATCH:执行器可以重复执行语句和批量更新
+        -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
+        <setting name="defaultStatementTimeout" value="25"/>
+        <!-- 是否启用 行内嵌套语句  defaut:false -->
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <!-- 设置本地缓存范围 session:就会有数据的共享  statement:语句范围 (这样就不会有数据的共享 ) defalut:session -->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- 设置JDBC类型为空时,某些驱动程序 要指定值,default:other -->
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <!-- 设置触发延迟加载的方法 -->
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+        <!-- 是否 启用 数据中 A_column 自动映射 到 java类中驼峰命名的属性 default:fasle -->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+
+    </settings>
+
+    <typeAliases>
+        <package name="com.pkh.po"/>
+    </typeAliases>
+
+    <mappers>
+        <!-- 统一放在 SqlSessionFactoryBean mapperLocations 里配置 -->
+        <!--<mapper resource="xx/repository/mapper/xxxMapper.xml" />-->
+    </mappers>
+
+</configuration> 
