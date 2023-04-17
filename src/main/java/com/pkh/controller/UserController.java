@@ -1,6 +1,7 @@
 package com.pkh.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pkh.annotation.PkhLog;
 import com.pkh.bean.param.UserListParam;
 import com.pkh.bean.response.PikaResponse;
@@ -31,11 +32,10 @@ public class UserController {
 
     @PostMapping("/list")
     @PkhLog
-    public PikaResponse<Object> list(@RequestBody UserListParam param) {
+    public PikaResponse<Object> list(@RequestBody UserListParam param) throws JsonProcessingException {
         Integer count = userService.countByParam(param);
         log.info("/user/list count number: {}", count);
         List<User> userList = new ArrayList<>();
-        count = null;
         if (count > 0) {
             userList = userService.getByParam(param);
         }

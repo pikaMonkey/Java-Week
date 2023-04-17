@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkh.dao.mapper.admindb.AdminUserMapper">
+  <resultMap id="BaseResultMap" type="com.pkh.dao.po.admindb.AdminUser">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="DEALPASSWORD" jdbcType="VARCHAR" property="dealpassword" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="USER_LEVEL" jdbcType="VARCHAR" property="userLevel" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="we_chat" jdbcType="VARCHAR" property="weChat" />
+    <result column="telegram" jdbcType="VARCHAR" property="telegram" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="ZIP_CODE" jdbcType="VARCHAR" property="zipCode" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="STATUS_FLAG" jdbcType="CHAR" property="statusFlag" />
+    <result column="OTHER_INFO" jdbcType="VARCHAR" property="otherInfo" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="LANG_TYPE" jdbcType="VARCHAR" property="langType" />
+    <result column="PERMISSION_LANG" jdbcType="VARCHAR" property="permissionLang" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, USER_NAME, `PASSWORD`, DEALPASSWORD, SEX, `TYPE`, USER_LEVEL, PHONE, 
+    MOBILE, EMAIL, we_chat, telegram, ADDRESS, ZIP_CODE, ROLE_ID, STATUS_FLAG, OTHER_INFO, 
+    CREATE_TIME, LANG_TYPE, PERMISSION_LANG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_admin_user
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_admin_user
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.pkh.dao.po.admindb.AdminUser" useGeneratedKeys="true">
+    insert into t_admin_user (USER_ID, USER_NAME, `PASSWORD`, 
+      DEALPASSWORD, SEX, `TYPE`, 
+      USER_LEVEL, PHONE, MOBILE, 
+      EMAIL, we_chat, telegram, 
+      ADDRESS, ZIP_CODE, ROLE_ID, 
+      STATUS_FLAG, OTHER_INFO, CREATE_TIME, 
+      LANG_TYPE, PERMISSION_LANG)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{dealpassword,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{type,jdbcType=VARCHAR}, 
+      #{userLevel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{weChat,jdbcType=VARCHAR}, #{telegram,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{statusFlag,jdbcType=CHAR}, #{otherInfo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{langType,jdbcType=VARCHAR}, #{permissionLang,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.pkh.dao.po.admindb.AdminUser" useGeneratedKeys="true">
+    insert into t_admin_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="password != null">
+        `PASSWORD`,
+      </if>
+      <if test="dealpassword != null">
+        DEALPASSWORD,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="type != null">
+        `TYPE`,
+      </if>
+      <if test="userLevel != null">
+        USER_LEVEL,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="weChat != null">
+        we_chat,
+      </if>
+      <if test="telegram != null">
+        telegram,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="statusFlag != null">
+        STATUS_FLAG,
+      </if>
+      <if test="otherInfo != null">
+        OTHER_INFO,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="langType != null">
+        LANG_TYPE,
+      </if>
+      <if test="permissionLang != null">
+        PERMISSION_LANG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="dealpassword != null">
+        #{dealpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null">
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="telegram != null">
+        #{telegram,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusFlag != null">
+        #{statusFlag,jdbcType=CHAR},
+      </if>
+      <if test="otherInfo != null">
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="langType != null">
+        #{langType,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionLang != null">
+        #{permissionLang,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkh.dao.po.admindb.AdminUser">
+    update t_admin_user
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `PASSWORD` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="dealpassword != null">
+        DEALPASSWORD = #{dealpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `TYPE` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        USER_LEVEL = #{userLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null">
+        we_chat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="telegram != null">
+        telegram = #{telegram,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusFlag != null">
+        STATUS_FLAG = #{statusFlag,jdbcType=CHAR},
+      </if>
+      <if test="otherInfo != null">
+        OTHER_INFO = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="langType != null">
+        LANG_TYPE = #{langType,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionLang != null">
+        PERMISSION_LANG = #{permissionLang,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pkh.dao.po.admindb.AdminUser">
+    update t_admin_user
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      `PASSWORD` = #{password,jdbcType=VARCHAR},
+      DEALPASSWORD = #{dealpassword,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      `TYPE` = #{type,jdbcType=VARCHAR},
+      USER_LEVEL = #{userLevel,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      we_chat = #{weChat,jdbcType=VARCHAR},
+      telegram = #{telegram,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      STATUS_FLAG = #{statusFlag,jdbcType=CHAR},
+      OTHER_INFO = #{otherInfo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LANG_TYPE = #{langType,jdbcType=VARCHAR},
+      PERMISSION_LANG = #{permissionLang,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="countByCondition" resultType="Integer" parameterType="Map">
+    select count(*) from t_admin_user
+    where 1=1
+    <if test="map != null">
+      <foreach collection="map" item="value" index="key">
+        <if test="value != null and value != ''">
+          AND ${key} = #{value}
+        </if>
+      </foreach>
+    </if>
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="Map">
+    select
+    <include refid="Base_Column_List"/>
+    from t_admin_user
+    where 1=1
+    <if test="map != null">
+      <foreach collection="map" item="value" index="key">
+        <if test="value != null and value != ''">
+          AND ${key} = #{value}
+        </if>
+      </foreach>
+    </if>
+    <if test="offset != null and pageSize != null">
+      LIMIT #{offset}, #{pageSize}
+    </if>
+  </select>
+
+</mapper>

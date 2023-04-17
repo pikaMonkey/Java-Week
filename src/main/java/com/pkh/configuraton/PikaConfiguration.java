@@ -13,6 +13,8 @@ public class PikaConfiguration {
     @Bean
     @ConfigurationProperties("pikaday")
     public PikaDayBean getPikaDayBean() {
-        return new PikaDayBean();
+
+        PikaDayBean pikaDayBean = new PikaDayBean();
+        return pikaDayBean;
     }
 }
