@@ -1,6 +1,7 @@
 package com.pkh.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pkh.annotation.DS;
 import com.pkh.bean.param.AdminListParam;
 import com.pkh.bean.response.PikaResponse;
 import com.pkh.dao.po.admindb.AdminUser;
@@ -21,6 +22,7 @@ public class AdminController {
     AdminService adminService;
 
     @PostMapping("/list")
+    @DS("admin")
     public PikaResponse list(AdminListParam param) {
         try {
             Integer total = adminService.countByParam(param);

@@ -1,4 +1,4 @@
-package com.pkh.dao.mapper.admindb;
+package com.pkh.dao.mapper;
 
 import com.pkh.dao.po.admindb.AdminUser;
 import org.apache.ibatis.annotations.Param;
