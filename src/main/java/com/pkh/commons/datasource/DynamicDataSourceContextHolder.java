@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DynamicDataSourceContextHolder {
     /**
-     * 使用ThreadLocal维护变量，为每个使用该变量的线程提供独立的变量副本
+     * 使用ThreadLocal维护变量
      */
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
@@ -30,7 +30,7 @@ public class DynamicDataSourceContextHolder {
     }
 
     /**
-     * 判断指定DataSrouce当前是否存在
+     * 判断指定DataSource当前是否存在
      *
      * @param dataSourceId  数据源Id
      * @return

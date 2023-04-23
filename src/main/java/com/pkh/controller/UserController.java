@@ -62,7 +62,7 @@ public class UserController {
             return new PikaResponse<>(jsonObject);
         } catch (Exception e) {
             log.info("/user/getByCondition failed, exception:{}", e.getMessage());
-            return new PikaResponse<>("-1", "failed!");
+            return new PikaResponse<>("-1", "fail   ed!");
         }
     }
 
