@@ -30,9 +30,9 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @PostMapping("/list")
+    @RequestMapping("/list")
     @PkhLog
-    public PikaResponse<Object> list(@RequestBody UserListParam param) throws JsonProcessingException {
+    public PikaResponse<Object> list(UserListParam param) throws JsonProcessingException {
         Integer count = userService.countByParam(param);
         log.info("/user/list count number: {}", count);
         List<User> userList = new ArrayList<>();
