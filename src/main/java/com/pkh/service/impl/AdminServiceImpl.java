@@ -1,7 +1,7 @@
 package com.pkh.service.impl;
 
 import com.pkh.bean.param.AdminListParam;
-import com.pkh.dao.mapper.admindb.AdminUserMapper;
+import com.pkh.dao.mapper.AdminUserMapper;
 import com.pkh.dao.po.admindb.AdminUser;
 import com.pkh.service.AdminService;
 import org.springframework.stereotype.Service;

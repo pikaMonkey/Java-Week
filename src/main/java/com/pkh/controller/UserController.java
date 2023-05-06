@@ -2,6 +2,7 @@ package com.pkh.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pkh.annotation.DS;
 import com.pkh.annotation.PkhLog;
 import com.pkh.bean.param.UserListParam;
 import com.pkh.bean.response.PikaResponse;
@@ -61,7 +62,7 @@ public class UserController {
             return new PikaResponse<>(jsonObject);
         } catch (Exception e) {
             log.info("/user/getByCondition failed, exception:{}", e.getMessage());
-            return new PikaResponse<>("-1", "failed!");
+            return new PikaResponse<>("-1", "fail   ed!");
         }
     }
 
