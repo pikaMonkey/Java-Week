@@ -2,7 +2,7 @@
 
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-    <property name="LOG_PATH" value="/opt/tomcat/logs/java-week"/>
+    <property name="LOG_PATH" value="/opt/logs/java-week"/>
     <property name="LOG_CHARSET" value="UTF-8"/>
     <property name="LOG_PATTERN" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS})|%green(%level)|%magenta(%thread)|%yellow(%logger{1})|%green(line-%line)|%cyan(%X{traceId})|%m%n"/>
 

@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * OncePerRequestFilter是在一次外部请求中只过滤一次。
+ * 对于服务器内部之间的forward等请求，不会再次执行过滤方法。
+ */
 @Configuration
 public class LogFilter extends OncePerRequestFilter implements Ordered {
     private final static String MDC_TRACE_ID = "traceId";
