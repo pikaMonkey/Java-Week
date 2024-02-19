@@ -16,7 +16,7 @@ import java.util.List;
 
 @RequestMapping("/customer")
 @Slf4j
-@RestController
+//@RestController
 public class CustomerController {
 
     @Resource

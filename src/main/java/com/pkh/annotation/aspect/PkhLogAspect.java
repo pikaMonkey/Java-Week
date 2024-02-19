@@ -31,28 +31,28 @@ public class PkhLogAspect {
         HttpServletRequest request = requestAttributes.getRequest();
 
         String methodName = joinPoint.getSignature().getName();
-        System.out.println("========================================= Method " + methodName + "() begin=========================================");
+        log.info("========================================= Method " + methodName + "() begin=========================================");
         // 执行时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d= new Date();
         String time = sdf.format(d);
-        System.out.println("Time           : " + time);
+        log.info("Time           : " + time);
         // 打印请求 URL
-        System.out.println("URL :            " + request.getRequestURL());
+        log.info("URL            : " + request.getRequestURL());
         // 打印 请求方法
-        System.out.println("HTTP Method:     " + request.getMethod());
+        log.info("HTTP Method    : " + request.getMethod());
         // 打印controller 的全路径以及执行方法
-        System.out.println("Class Method   : " + joinPoint.getSignature().getDeclaringTypeName() + "." + methodName);
+        log.info("Class Method   : " + joinPoint.getSignature().getDeclaringTypeName() + "." + methodName);
         // 打印请求的 IP
-        System.out.println("IP             : " + request.getRemoteHost());
+        log.info("IP             : " + request.getRemoteHost());
         // 打印请求入参
-        System.out.println("Request Args   : " + JSON.toJSONString(joinPoint.getArgs()));
-        System.out.println("=======================================================================================================");
+        log.info("Request Args   : " + JSON.toJSONString(joinPoint.getArgs()));
+        log.info("Executing Controller...");
     }
 
     @After("pkhLogAspect()")
     public void afterPkhLog(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
-        log.info("========================================= Method " + methodName + "() end =========================================");
+        log.info("========================================= Method " + methodName + "() End =========================================");
     }
 }

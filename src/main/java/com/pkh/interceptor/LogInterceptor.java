@@ -16,11 +16,18 @@ public class LogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("Interceptor PreHandle event");
-//        long currentTime = System.nanoTime();
-//        String traceIdStr = String.join("_", MDC_TRACE_ID, String.valueOf(currentTime));
-//        log.info("LogInterceptor traceId: {}", traceIdStr);
-//        MDC.put(MDC_TRACE_ID, traceIdStr);
-//        log.info("LogInterceptor Put MDC Successfully!");
+        String traceIDStr = getMdcTraceId();
+        MDC.put(MDC_TRACE_ID, traceIDStr);
         return true;
+    }
+
+    /**
+     * 生产tranceId
+     *
+     * @return tranceID
+     */
+    private String getMdcTraceId() {
+        long currentTime = System.nanoTime();
+        return String.join("_", MDC_TRACE_ID, String.valueOf(currentTime));
     }
 }
