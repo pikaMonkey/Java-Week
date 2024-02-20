@@ -6,6 +6,7 @@
     import com.pkh.bean.response.PikaResponse;
     import com.pkh.dao.po.admindb.AdminUser;
     import com.pkh.service.AdminService;
+    import com.pkh.util.RedisUtil;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.web.bind.annotation.PostMapping;
     import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@
         @Resource
         AdminService adminService;
 
+        @Resource
+        RedisUtil redisUtil;
         @PostMapping("/list")
         @DS("admin")
         public PikaResponse list(AdminListParam param) {

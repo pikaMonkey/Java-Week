@@ -19,6 +19,7 @@ public class PikaResponse<T> implements Serializable {
             this.code = "0";
             this.data = data;
         }
+        this.message = "success";
     }
 
     public PikaResponse(String code, String message) {

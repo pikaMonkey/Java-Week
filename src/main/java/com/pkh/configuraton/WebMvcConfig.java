@@ -11,7 +11,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LogInterceptor logInterceptor = new LogInterceptor();
-        registry.addInterceptor(logInterceptor)
-                .addPathPatterns("/**");
+//        registry.addInterceptor(logInterceptor)
+//                .addPathPatterns("/**");
     }
 }

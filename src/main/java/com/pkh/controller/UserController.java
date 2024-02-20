@@ -11,6 +11,7 @@ import com.pkh.dao.po.Rights;
 import com.pkh.dao.po.User;
 import com.pkh.enums.SexEnum;
 import com.pkh.service.UserService;
+import com.pkh.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -30,6 +33,9 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    RedisUtil redisUtil;
 
     @RequestMapping("/list")
     @PkhLog
