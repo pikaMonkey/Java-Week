@@ -73,13 +73,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUserId(String userId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("user_id", userId);
-        List<User> userList = userMapper.selectByCondition(map, null, null);
-        if (!CollectionUtils.isEmpty(userList)) {
-            return userList.get(0);
-        }
-        return null;
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("user_id", userId);
+//        List<User> userList = userMapper.selectByCondition(map, null, null);
+//        if (!CollectionUtils.isEmpty(userList)) {
+//            return userList.get(0);
+//        }
+//        return null;
+
+        return new User("pika@163.com");
     }
 
     @Override

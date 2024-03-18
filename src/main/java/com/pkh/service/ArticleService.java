@@ -6,6 +6,8 @@ public interface ArticleService {
 
     Long collectArticle(String articleId, String userId);
 
+    Long cancelCollectArticle(String articleId, String userId);
+
     Long getArticleCollectCount(String articleId);
 
     Long likeArticle(String articleId, String userId);

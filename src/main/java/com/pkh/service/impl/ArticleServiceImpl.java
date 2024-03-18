@@ -21,25 +21,32 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Long collectArticle(String articleId, String userId) {
         String key = this.generateArticleCollectKey(articleId);
-        return redisUtil.AddSet(key, userId);
+        return redisUtil.addSet(key, userId);
+    }
+
+    @Override
+    public Long cancelCollectArticle(String articleId, String userId) {
+        String key = this.generateArticleCollectKey(articleId);
+        return redisUtil.removeSet(key, userId);
     }
 
     @Override
     public Long likeArticle(String articleId, String userId) {
         String key = this.generateArticleLikeKey(articleId);
-        return redisUtil.AddSet(key, userId);
+        redisUtil.publish("__bili_like__", userId + ": " + articleId);
+        return redisUtil.addSet(key, userId);
     }
 
     @Override
     public Long getArticleLikeCount(String articleId) {
         String key = this.generateArticleLikeKey(articleId);
-        return redisUtil.CountSet(key);
+        return redisUtil.countSet(key);
     }
 
     @Override
     public Long getArticleCollectCount(String articleId) {
         String key = this.generateArticleCollectKey(articleId);
-        return redisUtil.CountSet(key);
+        return redisUtil.countSet(key);
     }
 
     /**

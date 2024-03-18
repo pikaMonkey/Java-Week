@@ -2,6 +2,8 @@ package com.pkh.bean.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 public class UserVo {
     private Long id;
@@ -31,4 +33,5 @@ public class UserVo {
     private String createTime;
 
     private String updateTime;
+
 }

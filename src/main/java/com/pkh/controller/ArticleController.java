@@ -43,6 +43,16 @@ public class ArticleController {
         return new PikaResponse<>(res);
     }
 
+    @PostMapping("/cancelCollectArticle")
+    public PikaResponse<Object> cancelCollectArticle(String articleId, String userId) {
+        Long cancelRes = articleService.cancelCollectArticle(articleId, userId);
+        String msg = "success";
+        if (cancelRes < 0) {
+            msg = "failed";
+        }
+        return new PikaResponse<>(String.valueOf(cancelRes), msg);
+    }
+
     @PostMapping("/getArticleCollectCount")
     public PikaResponse<Object> getArticleCollectCount(String articleId) {
         Long articleCollectCount = articleService.getArticleCollectCount(articleId);
@@ -70,5 +80,7 @@ public class ArticleController {
         res.put("count", articleLikeCount);
         return new PikaResponse<>(res);
     }
+
+
 }
 

@@ -22,8 +22,6 @@
         @Resource
         AdminService adminService;
 
-        @Resource
-        RedisUtil redisUtil;
         @PostMapping("/list")
         @DS("admin")
         public PikaResponse list(AdminListParam param) {

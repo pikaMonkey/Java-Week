@@ -42,6 +42,10 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public User(String userId) {
+        this.userId = userId;
+    }
+
     public Long getId() {
         return id;
     }

@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisUtil {
@@ -18,11 +19,35 @@ public class RedisUtil {
      *
      * @param key Redis键
      * @param value Redis值
-     * @param <T>
+     *
      */
-    public <T> void setCacheObject(final String key, final T value) {
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        operations.set(key, value);
+    public boolean set(final String key, final Object value) {
+        try {
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+            operations.set(key, value);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    /**
+     * 设置Redis键值对，包含Redis的过期时间
+     *
+     * @param key   Redis键
+     * @param value Redis值
+     * @param expireTime 过期时间
+     * @return
+     */
+    public boolean set(final String key, Object value, Long expireTime) {
+        try {
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+            operations.set(key, value);
+            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     /**
@@ -32,10 +57,56 @@ public class RedisUtil {
      * @param key Redis键
      * @return
      */
-    public Object getCacheObject(final String key)
+    public Object get(final String key)
     {
         ValueOperations<String, Object> operation = redisTemplate.opsForValue();
         return operation.get(key);
+    }
+
+    /**
+     * 根据Redis键，判断是否存在
+     *
+     * @param key Redis键值
+     * @return
+     */
+    public boolean exist(final String key) {
+        Boolean isExist = redisTemplate.hasKey(key);
+        if (null == isExist) {
+            isExist = false;
+        }
+        return isExist;
+    }
+
+    /**
+     * 根据Redis键，删除缓存
+     *
+     * @param key Redis键值
+     * @return
+     */
+    public boolean remove(final String key) {
+        Boolean isDeleted = null;
+        if (this.exist(key)) {
+             isDeleted = redisTemplate.delete(key);
+        }
+        if (null == isDeleted) {
+            isDeleted = false;
+        }
+        return isDeleted;
+    }
+
+    /**
+     * 根据Redis键，设置有效期
+     *
+     * @param key   Redis键值
+     * @param seconds   有效期
+     * @return
+     */
+    public boolean expire(final String key, long seconds) {
+        Boolean isExpired = redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
+        if (null == isExpired) {
+            isExpired = false;
+        }
+        return isExpired;
     }
 
     /**
@@ -56,11 +127,24 @@ public class RedisUtil {
      *
      * @param key Redis键
      * @param userId 集合中的元素（用户Id）
-     * @return
+     * @return 成功添加到 Redis 集合中的元素数量
      */
-    public Long AddSet(final String key, final String userId) {
+    public Long addSet(final String key, final String userId) {
         SetOperations<String, Object> operations = redisTemplate.opsForSet();
         return operations.add(key, userId);
+    }
+
+    /**
+     * 根据Redis键，移除集合中元素
+     * srem key value
+     *
+     * @param key   Redis键
+     * @param userId    移除的元素（用户Id）
+     * @return  被成功移除的元素的数量
+     */
+    public Long removeSet(final String key, final String userId) {
+        SetOperations<String, Object> operations = redisTemplate.opsForSet();
+        return operations.remove(key, userId);
     }
 
     /**
@@ -70,9 +154,20 @@ public class RedisUtil {
      * @param key Redis键
      * @return
      */
-    public Long CountSet(final String key) {
+    public Long countSet(final String key) {
         SetOperations<String, Object> operations = redisTemplate.opsForSet();
         return operations.size(key);
+    }
+
+
+    /**
+     * 发布消息
+     *
+     * @param channel 频道
+     * @param msg 消息
+     */
+    public void publish(final String channel, final String msg) {
+        redisTemplate.convertAndSend(channel, msg);
     }
 
 }
