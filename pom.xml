@@ -110,6 +110,13 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
+		<!-- Redisson 分布场景下Redis客户端 -->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson-spring-boot-starter</artifactId>
+			<version>3.23.5</version>
+		</dependency>
+
 		<!--shiro：信息安全验证-->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
